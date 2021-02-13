@@ -24,8 +24,8 @@ function LoginPopup({ isOpen, onClose }) {
 
 	return (
 		<PopupWithForm isOpen={isOpen} onClose={onClose} name='login' title='Вход' btnName='Вход' onSubmit={handleSubmit}>
-			<Input description='Email' name='email' type='email' onChange={handleChange} value={data.email} />
-			<Input description='Пароль' name='password' type='password' onChange={handleChange} value={data.password} />
+			<Input placeholder="Введите почту" description='Email' name='email' type='email' onChange={handleChange} value={data.email} />
+			<Input placeholder='Введите пароль' description='Пароль' name='password' type='password' onChange={handleChange} value={data.password} />
 		</PopupWithForm>
 	)
 }

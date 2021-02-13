@@ -33,7 +33,7 @@ return (
 				<Route exact path="/saved-news">
 					<Header theme='dark' />
 					<SavedNewsHeader />
-					<NewsCardList />
+					<NewsCardList isSaved={true}/>
 				</Route>
 			</Switch>
 			<Footer />

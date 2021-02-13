@@ -21,8 +21,7 @@ function Main({ }) {
 				</div>
 			</section>
 			<Preloader />
-			{/* <h2 className='cards-list__title'>Результаты поиска</h2> */}
-			{/* <NewsCardList /> */}
+			<NewsCardList isSaved={false}/>
 			<About />
 		</main>
 	)
