@@ -4,8 +4,11 @@ import classNames from 'classnames';
 
 import cardImg from '../../data/card-img.png'
 
-function NewsCard({ card, link }) {
+function NewsCard({ link }) {
 
+	const card = {
+		title: 'Национальное достояние – парки'
+	}
 	const isSaved = true
 	// const cardinBookmarkClassName = classNames('card__bookmark-button', 'card__bookmark-button_type_hover', {
 	// 	'card__bookmark-button_type_added': isAdded
@@ -20,7 +23,7 @@ function NewsCard({ card, link }) {
 					</div>
 				: <button type="button" className='card__button_type_not-added' />
 			}
-			<div style={{ backgroundImage: `url(${cardImg})` }} className='card__image' type='button'></div>
+			<img alt={`изображение ${card.title}`} src={cardImg} className='card__image' type='button'></img>
 			<div className="card__description">
 				<p className='card__data'>2 августа, 2019</p>
 				<h2 className='card__title'>Национальное достояние – парки</h2>

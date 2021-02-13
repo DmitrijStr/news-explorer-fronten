@@ -15,10 +15,10 @@
 }
 
 .pop-up_type_opened {
-		visibility: visible;
-		opacity: 1;
-		pointer-events: all;
-		transition: .5s linear;
+	visibility: visible;
+	opacity: 1;
+	pointer-events: all;
+	transition: .5s linear;
 }
 
 .pop-up__container {
@@ -44,11 +44,20 @@
 	position: absolute;
 	top: -40px;
 	right: -35px;
-
-
+	background-color: transparent;
+	background-image: url(../../images/close.svg);
 	overflow: visible;
 	background-size: auto;
 	background-position: center;
+
+}
+
+.pop-up__btn_action_deny:hover {
+	cursor: pointer;
+}
+
+.pop-up__btn_action_deny:focus {
+	outline: none;
 }
 
 .pop-up__title {
@@ -58,7 +67,6 @@
 	margin-top: 34px;
 	margin-left: 36px;
 }
-
 
 .pop-up__form {
 	font-family: 'Inter';
