@@ -1,0 +1,16 @@
+.page {
+	margin: 0 auto;
+	font-family: 'Roboto', 'Inter', sans-serif;
+	font-style: normal;
+	font-weight: normal;
+	color: white;
+	-moz-osx-font-smoothing: grayscale;
+	-webkit-font-smoothing: antialiased;
+}
+
+.page__content {
+	min-width: 320px;
+	max-width: 1440px;
+	margin: 0 auto;
+	position: relative;
+}

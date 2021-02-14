@@ -1,0 +1,22 @@
+.input__field {
+	width: 100%;
+	font-size: 14px;
+	line-height: 17px;
+	margin: 9px 0 0;
+	padding: 0 0 9px;
+	outline: none;
+	border: none;
+	border-bottom: 1px solid rgba(0, 0, 0, .2);
+}
+
+.input__description {
+	font-size: 12px;
+	line-height: 15px;
+	color: #2F71E5;
+	margin: 0;
+}
+
+.input {
+	width: 100%;
+	margin-bottom: 31px;
+}
