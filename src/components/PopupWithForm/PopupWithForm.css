@@ -92,4 +92,15 @@
 	margin: 8px auto 16px;
 	max-width: 358px;
 	border-radius: 100px;
+	background-color: #2F71E5;
+}
+
+.pop-up__btn_action_save:disabled {
+	background-color: #E6E8EB;
+}
+
+.pop-up__switch-btn {
+	border: 0;
+	background-color: #FFF;
+	margin-bottom: 28px;
 }

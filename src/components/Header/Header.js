@@ -1,11 +1,10 @@
 import React from 'react';
-import { Link, NavLink, useLocation } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import classNames from 'classnames'
-
 import Navigation from '../Navigation/Navigation';
 import './Header.css'
 
-function Header({ loggedIn, theme, onLoginClick }) {
+function Header({ loggedIn, theme, onLoginClick, onLogout }) {
 
 	const darkThemeHeaderClassName = classNames('header', {
 		'header_theme_dark': theme === 'dark'
@@ -18,12 +17,10 @@ function Header({ loggedIn, theme, onLoginClick }) {
 	return (
 		<header className={darkThemeHeaderClassName}>
 			<NavLink to={'/'} className='header__link'>NewsExplorer</NavLink>
-			<Navigation onLoginClick={onLoginClick}  theme={theme}/>
+			<Navigation onLoginClick={onLoginClick}  theme={theme} loggedIn={loggedIn} onLogout={onLogout}/>
 			<button className={darkBurgerButton}>
-
 			</button>
 		</header>
-
 	)
 }
 

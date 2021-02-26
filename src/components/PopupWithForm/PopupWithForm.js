@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect } from 'react';
 import './PopupWithForm.css';
 
-function PopupWithForm({ name, isOpen, onClose, title, children, onSubmit, btnName }) {
+function PopupWithForm({ name, isOpen, onClose, title, children, onSubmit, btnName, switchButton, onSwitchButton, isValid }) {
 
 	const escFunction = useCallback((event) => {
 		if (event.keyCode === 27) {
@@ -29,10 +29,10 @@ function PopupWithForm({ name, isOpen, onClose, title, children, onSubmit, btnNa
 				<p className="pop-up__title">{title}</p>
 				<form className="pop-up__form" method="GET" noValidate onSubmit={onSubmit}>
 					{children}
-					<button className="pop-up__btn pop-up__btn_action_save" type="submit">
+					<button className="pop-up__btn pop-up__btn_action_save" type="submit" disabled={!isValid}>
 						{btnName}
 					</button>
-					<p>или Зарегистрироваться</p>
+					<button className="pop-up__switch-btn" type='button' onClick={onSwitchButton}>или {switchButton}</button>
 				</form>
 			</div>
 		</section>
