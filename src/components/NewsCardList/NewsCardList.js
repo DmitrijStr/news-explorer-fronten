@@ -3,11 +3,11 @@ import './NewsCardList.css';
 
 import NewsCard from '../NewsCard/NewsCard';
 
-function NewsCardList({ isSearched, view, cards, onBookmarkClick, keyword, savedCards, onArticleDelete }) {
+function NewsCardList({ isSearched, view, cards, onBookmarkClick, keyword, savedCards, onArticleDelete, savedArticles }) {
 
 	const [count, setCount] = useState(3);
 	const [isRender, setRender] = useState(true)
-
+	
 	const showCards = () => {
 		setCount(count + 3);
 		if (count === cards.length - 3) {
@@ -35,6 +35,7 @@ function NewsCardList({ isSearched, view, cards, onBookmarkClick, keyword, saved
 							urlToImage={card.urlToImage}
 							isSaved={false}
 							keyword={keyword}
+							onArticleDelete={onArticleDelete}
 						/>
 					))}
 				{savedCards && (

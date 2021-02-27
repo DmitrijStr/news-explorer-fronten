@@ -3,7 +3,13 @@ import './NewsCard.css';
 import classNames from 'classnames';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
-function NewsCard({card, isSaved, title, publishedAt, urlToImage, description, source, url, onBookmarkClick, keyword, onArticleDelete }) {
+function NewsCard({ card, isSaved, title, publishedAt, urlToImage, description, source, url, onBookmarkClick, keyword, onArticleDelete, }) {
+
+	const cardBookmarkButtonClassName = classNames('card__button', 'card__button_type_bookmark', {
+		'card__button_type_added': card.isAdded
+	});
+
+	// console.log(card)
 
 	const currentUser = React.useContext(CurrentUserContext);
 	function handleBookmarkClick() {
@@ -19,17 +25,19 @@ function NewsCard({card, isSaved, title, publishedAt, urlToImage, description, s
 	}
 
 	function handleDeleteClick() {
+		console.log(card)
 		onArticleDelete(card._id);
+		card.isAdded = false
 	}
 
 	return (
 		<div className='card'>
 			{isSaved
-				?  <div>
+				? <div>
 					<div className='card__tag'>{keyword}</div>
-					<button type="button" className='card__button card__button_type_delete' onClick={handleDeleteClick}/>
-					</div>
-				: <button type="button" className='card__button card__button_type_bookmark' onClick={handleBookmarkClick}/>
+					<button type="button" className='card__button card__button_type_delete' onClick={handleDeleteClick} />
+				</div>
+				: <button type="button" className={cardBookmarkButtonClassName} onClick={card.isAdded ? handleDeleteClick : handleBookmarkClick} />
 			}
 			<img alt={`изображение ${title}`} src={urlToImage} className='card__image' />
 			<div className="card__description">

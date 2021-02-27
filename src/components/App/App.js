@@ -24,7 +24,7 @@ function App() {
 	const [isLoginPopupOpen, setLoginPopupOpen] = useState(false)
 	const [isRegisterPopupOpen, setRegisterPopupOpen] = useState(false)
 	const [isLoading, setIsLoading] = useState(false);
-	const [data, setData] = useState(null);
+	const [data, setData] = useState([]);
 	const [savedArticles, setSavedArticles] = useState(null)
 
 	const [infoTooltipState, setInfoTooltipState] = useState({
@@ -54,7 +54,7 @@ function App() {
 		if (isLoading) return <Preloader />
 		if (data === null) return null
 		if (data.length === 0) return <h2>Данных нет</h2>
-		return <NewsCardList isSearched={true} cards={data.cards} keyword={data.keyword} onBookmarkClick={handleBookmarkClick} />
+		return <NewsCardList isSearched={true} cards={data.cards} keyword={data.keyword} onBookmarkClick={handleBookmarkClick} savedCArticles={savedArticles} onArticleDelete={handleArticleDelete}/>
 	}
 
 	const handlePopupSwitch = () => {
@@ -86,7 +86,6 @@ function App() {
 			setToken(jwt)
 			getContent(jwt)
 				.then((res) => {
-					console.log(res)
 					if (res.data.email) {
 						setcurrentUser(res.data)
 						setLoggedIn(true)
@@ -100,7 +99,7 @@ function App() {
 	}
 
 	function handleArticleDelete(id) {
-		console.log(id)
+		console.log(id, 'delete')
 		deleteArticle(token, id)
 			.then(() => {
 				setSavedArticles(savedArticles.filter(article => article._id !== id))
@@ -109,9 +108,22 @@ function App() {
 	}
 
 	const handleBookmarkClick = (newArticle) => {
+		console.log('data', data)
+		console.log('save', newArticle)
 		saveArticle(token, newArticle)
-			.then((data) => {
-				setSavedArticles([...savedArticles, data.data]);
+			.then((newArticle) => {
+				console.log(newArticle.data)
+				const newCards = data.cards.map((c) => {
+					if (c.url === newArticle.data.link) {
+						c.isAdded = true
+						c._id = newArticle.data._id
+					}
+					return c
+				})
+
+				setData({ cards: newCards, keyword: newArticle.data.keyword })
+				console.log(data)
+				setSavedArticles([...savedArticles, newArticle.data]);
 			})
 			.catch(err => console.log(err))
 	}

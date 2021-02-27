@@ -42,7 +42,6 @@ function LoginPopup({ isOpen, onClose, handleLogin, handlePopupSwitch }) {
 		handleLogin(values)
 	}
 
-	console.log(values,errors, isValid)
 	return (
 		<PopupWithForm isOpen={isOpen} onClose={onClose} name='login' title='Вход' btnName='Вход' onSubmit={handleSubmit} switchButton='Зарегистрироваться' onSwitchButton={handlePopupSwitch} isValid={isValid}>
 			<Input placeholder="Введите почту" description='Email' name='email' type='email' onChange={handleChange} value={values.email} error={errors.email}/>

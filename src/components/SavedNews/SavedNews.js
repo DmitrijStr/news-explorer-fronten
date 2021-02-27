@@ -13,7 +13,10 @@ function SavedNews({theme, onLoginClick, loggedIn, onLogout, isSaved, savedCards
 				loggedIn={loggedIn}
 				onLogout={onLogout}
 			/>
-			<SavedNewsHeader />
+			<SavedNewsHeader 
+				SavedCards={savedCards.length}
+				cards={savedCards}
+			/>
 			<NewsCardList
 				isSaved={isSaved}
 				savedCards={savedCards}
