@@ -1,39 +1,50 @@
 import React from 'react';
 import './NewsCard.css';
 import classNames from 'classnames';
+import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
-import cardImg from '../../data/card-img.png'
+function NewsCard({ card, isSaved, title, publishedAt, urlToImage, description, source, url, onBookmarkClick, keyword, onArticleDelete, }) {
 
-function NewsCard({isSaved, view, link }) {
+	const cardBookmarkButtonClassName = classNames('card__button', 'card__button_type_bookmark', {
+		'card__button_type_added': card.isAdded
+	});
 
-	const card = {
-		title: 'Национальное достояние – парки'
+	// console.log(card)
+
+	const currentUser = React.useContext(CurrentUserContext);
+	function handleBookmarkClick() {
+		onBookmarkClick({
+			keyword: keyword,
+			title: title,
+			text: description,
+			date: publishedAt,
+			source: source,
+			link: url,
+			image: urlToImage
+		});
 	}
 
-	// const cardinBookmarkClassName = classNames('card__bookmark-button', 'card__bookmark-button_type_hover', {
-	// 	'card__bookmark-button_type_added': isAdded
-	// });
-
-
-
-
+	function handleDeleteClick() {
+		console.log(card)
+		onArticleDelete(card._id);
+		card.isAdded = false
+	}
 
 	return (
 		<div className='card'>
-			
 			{isSaved
-				?  <div> 
-					<div className='card__tag'>Природа</div> 
-					<button type="button" className='card__button card__button_type_delete' />
-					</div>
-				: <button type="button" className='card__button card__button_type_bookmark' />
+				? <div>
+					<div className='card__tag'>{keyword}</div>
+					<button type="button" className='card__button card__button_type_delete' onClick={handleDeleteClick} />
+				</div>
+				: <button type="button" className={cardBookmarkButtonClassName} onClick={card.isAdded ? handleDeleteClick : handleBookmarkClick} />
 			}
-			<img alt={`изображение ${card.title}`} src={cardImg} className='card__image' />
+			<img alt={`изображение ${title}`} src={urlToImage} className='card__image' />
 			<div className="card__description">
-				<p className='card__data'>2 августа, 2019</p>
-				<h2 className='card__title'>Национальное достояние – парки</h2>
-				<p className='card__text'>В 2016 году Америка отмечала важный юбилей: сто лет назад здесь начала складываться система национальных парков – охраняемых территорий, где и сегодня каждый может приобщиться к природе.</p>
-				<p className='card__source'>Лента.ру</p>
+				<p className='card__data'>{publishedAt}</p>
+				<h2 className='card__title'>{title}</h2>
+				<p className='card__text'>{description.slice(0, 148) + '...'}</p>
+				<a className='card__url' href={url} target='blank'><p className='card__source'>{source}</p></a>
 			</div>
 		</div>
 	)

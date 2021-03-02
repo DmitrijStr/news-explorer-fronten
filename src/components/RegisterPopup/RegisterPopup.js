@@ -1,14 +1,15 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 
 import PopupWithForm from '../PopupWithForm/PopupWithForm';
 import Input from '../Input/Input';
-import './LoginPopup.css';
+import './RegisterPopup.css';
 
-function LoginPopup({ isOpen, onClose, handleLogin, handlePopupSwitch }) {
+function RegisterPopup({ isOpen, onClose, handleRegister, handlePopupSwitch }) {
 
 	const [values, setValues] = React.useState({
 		email: '',
-		password: ''
+		password: '',
+		name: ''
 	});
 	const [errors, setErrors] = React.useState({});
   const [isValid, setIsValid] = React.useState(false);
@@ -22,32 +23,19 @@ function LoginPopup({ isOpen, onClose, handleLogin, handlePopupSwitch }) {
     setIsValid(target.closest("form").checkValidity());
   };
 
-  const resetForm = useCallback(
-    (newValues = {}, newErrors = {}, newIsValid = false) => {
-      setValues(newValues);
-      setErrors(newErrors);
-      setIsValid(newIsValid);
-    },
-    [setValues, setErrors, setIsValid]
-  );
-
-	// const [data, setData] = useState({
-	// 	email: '',
-	// 	password: ''
-	// })
-
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		// let { email, password } = data;
-		handleLogin(values)
+		handleRegister(values)
 	}
 
 	return (
-		<PopupWithForm isOpen={isOpen} onClose={onClose} name='login' title='Вход' btnName='Вход' onSubmit={handleSubmit} switchButton='Зарегистрироваться' onSwitchButton={handlePopupSwitch} isValid={isValid}>
+		<PopupWithForm isOpen={isOpen} onClose={onClose} name='register' title='Регистрация' btnName='Регистрация' onSubmit={handleSubmit} switchButton='Войти' onSwitchButton={handlePopupSwitch} isValid={isValid}>
 			<Input placeholder="Введите почту" description='Email' name='email' type='email' onChange={handleChange} value={values.email} error={errors.email}/>
 			<Input placeholder='Введите пароль' description='Пароль' name='password' type='password' minLength={8} onChange={handleChange} value={values.password} error={errors.password}/>
+			<Input placeholder='Введите своё имя' description='Имя' name='name' type='text' onChange={handleChange} value={values.name} />
 		</PopupWithForm>
 	)
 }
 
-export default LoginPopup;
+export default RegisterPopup;

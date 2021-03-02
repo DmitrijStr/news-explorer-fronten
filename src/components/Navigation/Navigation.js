@@ -2,9 +2,11 @@ import React from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import './Navigation.css';
 import classNames from 'classnames'
+import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
-function Navigation({ loggedIn, theme, onLoginClick }) {
+function Navigation({ loggedIn, theme, onLoginClick, onLogout }) {
 
+	const currentUser = React.useContext(CurrentUserContext);
 	const darkThemeNavigationClassName = classNames('navigation', {
 		'navigation_theme_dark': theme === 'dark'
 	})
@@ -12,8 +14,13 @@ function Navigation({ loggedIn, theme, onLoginClick }) {
 	return (
 		<div className={darkThemeNavigationClassName}>
 			<NavLink activeClassName='navigation__link_active' exact to={'/'} className='navigation__link'>Главная</NavLink>
-				<NavLink activeClassName='navigation__link_active' to={'/saved-news'} className='navigation__link'>Сохраненные статьи</NavLink>
-				<button onClick={onLoginClick} className='navigation__button'>Авторизоваться</button>
+			{loggedIn
+				? <div>
+					<NavLink activeClassName='navigation__link_active' to={'/saved-news'} className='navigation__link'>Сохраненные статьи</NavLink>
+					<button onClick={onLogout} className='navigation__button'>{currentUser.name}</button>
+				</div>
+				: <button onClick={onLoginClick} className='navigation__button'>Авторизоваться</button>
+			}
 		</div>
 	)
 }
